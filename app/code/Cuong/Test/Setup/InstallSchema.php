@@ -14,12 +14,12 @@ class InstallSchema implements InstallSchemaInterface
     {
         $installer = $setup;
         $installer->startSetup();
-        if (!$installer->tableExists('table_custom')) {
+        if (!$installer->tableExists('table_brand')) {
             $table = $installer->getConnection()->newTable(
-                $installer->getTable('table_custom')
+                $installer->getTable('table_brand')
             )
                 ->addColumn(
-                    'custom_id',
+                    'brand_id',
                     Table::TYPE_INTEGER,
                     null,
                     [
@@ -31,7 +31,7 @@ class InstallSchema implements InstallSchemaInterface
                     ' ID'
                 )
                 ->addColumn(
-                    'custom_name',
+                    'brand_name',
                     Table::TYPE_TEXT,
                     255,
                     [
@@ -40,14 +40,14 @@ class InstallSchema implements InstallSchemaInterface
                     'Post Name'
                 )
                 ->addColumn(
-                    'custom_content',
+                    'brand_content',
                     Table::TYPE_TEXT,
                     '64k',
                     [],
                     'Post Content'
                 )
                 ->addColumn(
-                    'custom_status',
+                    'brand_status',
                     Table::TYPE_INTEGER,
                     1,
                     [],
@@ -63,17 +63,17 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Created At'
                 )
-                ->setComment('Custom Table');
+                ->setComment('Table Brand');
             $installer->getConnection()->createTable($table);
 
             $installer->getConnection()->addIndex(
-                $installer->getTable('table_custom'),
+                $installer->getTable('table_brand'),
                 $setup->getIdxName(
-                    $installer->getTable('table_custom'),
-                    ['custom_name', 'custom_content'],
+                    $installer->getTable('table_brand'),
+                    ['brand_name', 'brand_content'],
                     AdapterInterface::INDEX_TYPE_FULLTEXT
                 ),
-                ['custom_name', 'custom_content'],
+                ['brand_name', 'brand_content'],
                 AdapterInterface::INDEX_TYPE_FULLTEXT
             );
         }

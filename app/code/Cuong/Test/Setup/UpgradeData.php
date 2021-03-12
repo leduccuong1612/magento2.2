@@ -18,17 +18,17 @@ class UpgradeData implements UpgradeDataInterface
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(), '1.0.2', '<')) {
+        if (version_compare($context->getVersion(), '1.0.3', '<')) {
             $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
-            $eavSetup->addAttribute(\Magento\Catalog\Model\Product::ENTITY, 'use_setup_script',
+            $eavSetup->addAttribute(\Magento\Catalog\Model\Product::ENTITY, 'brand',
                 [
                     'group' => 'General',
-                    'attribute_set_id' => 'Bag',
+                    'attribute_set_id' => 'brand',
                     'type' => 'varchar',
                     'backend' => '',
                     'frontend' => '',
-                    'label' => 'Use Setup Script',
+                    'label' => 'Product Brand',
                     'input' => 'text',
                     'class' => '',
                     'source' => '',
